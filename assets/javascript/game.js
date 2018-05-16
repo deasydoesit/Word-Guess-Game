@@ -29,6 +29,18 @@ function restart() {
     word.innerHTML = "This is the word";
 }
 
+function appear() {
+    var firstDiv = document.getElementById("display");
+    var secondDiv = document.getElementById("playAgain")
+    firstDiv.style.display = null;
+    secondDiv.style.display = null;
+}
+
+function hide() {
+    var element = document.getElementById("playAgain");
+    element.style.display = "none";
+}
+
 //Function to assign a word from wordsBank to the wordInstance. Creates random number
 //then pulls the array value from the index corresponding to the random number.
 function selectWord() {
@@ -82,6 +94,7 @@ function checkIfWordGuessed() {
         wins.innerHTML = "User Wins: " + userWins;
         counter.innerHTML = "Game Counter: " + gameCounter;
         restart();
+        hide();
     }
 }
 
@@ -92,6 +105,7 @@ function checkIfLost() {
         userLosses++;
         losses.innerHTML = "User Losses: " + userLosses;
         restart();
+        hide();
     } 
 }
 
@@ -120,6 +134,7 @@ function startGame() {
     //Blanks are displayed corresponded to the length of the wordInstance
     displayBlanks();
 
+    appear();
     console.log(wordInstance);
 
     //Listening for user selection
