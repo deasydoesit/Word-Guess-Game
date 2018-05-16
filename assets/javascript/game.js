@@ -11,8 +11,23 @@ var userGuesses = "";
 var numOfGuesses = 7;
 var wordInstance;
 var placeholder = [];
+var start = false;
 
 var wordsBank = ["Han", "Luke", "Leial"];
+
+//Function to restart the game.
+function restart() {
+    var num = document.getElementById("num");
+    var userGuess = document.getElementById("userGuess");
+    var word = document.getElementById("word");
+    numOfGuesses = 7;
+    userGuesses = "";
+    wordInstance = undefined;
+    placeholder = [];
+    num.innerHTML = "Number of Guesses Left: " + numOfGuesses;
+    userGuess.innerHTML = "User Guesses";
+    word.innerHTML = "This is the word";
+}
 
 //Function to assign a word from wordsBank to the wordInstance. Creates random number
 //then pulls the array value from the index corresponding to the random number.
@@ -52,15 +67,13 @@ function isGuessInWord(guess) {
 function displayGuess(letterGuessed, array) {
     var correctLetter = document.getElementById("word");
     for (var i = 0; i < array.length; i++) {
-        console.log("placeholder[array[i]] = " + placeholder[array[i]]);
         placeholder[array[i]] = letterGuessed;
-        console.log("placeholder = " + placeholder);
     }
     correctLetter.innerHTML = placeholder.join(" ");
 }
 
 //Function to identify if the user guessed the word. If so, update wins and game counter.
-function checkIfWordGuessed () {
+function checkIfWordGuessed() {
     var wins = document.getElementById("wins");
     var counter = document.getElementById("counter");
     if (placeholder.join("") === wordInstance.toLowerCase() && placeholder.length === wordInstance.length) {
@@ -68,16 +81,17 @@ function checkIfWordGuessed () {
         gameCounter++;
         wins.innerHTML = "User Wins: " + userWins;
         counter.innerHTML = "Game Counter: " + gameCounter;
-        //NEED TO INCLUDE GAME RESET HERE
+        restart();
     }
 }
 
 //Function to identify if the user is out of guesses.
-function checkIfLost () {
+function checkIfLost() {
     if (numOfGuesses === 0) {
         var losses = document.getElementById("losses");
         userLosses++;
         losses.innerHTML = "User Losses: " + userLosses;
+        restart();
     } 
 }
 
@@ -88,7 +102,16 @@ function updateGuesses(letter) {
     guess.innerHTML = userGuesses;
 }
 
-//Function to start the game, which links up to the html input element.
+//Function to update the number of guesses left
+function updateGuessesRemaining(array) {
+    if (array.length === 0) {
+        numOfGuesses--;
+        var num = document.getElementById("num");
+        num.innerHTML = "Number of Guesses Left: " + numOfGuesses;
+    } 
+}
+
+//Function to toggle starter boolean to true based on button click.
 function startGame() {
 
     //wordInstance for the game is selected
@@ -100,8 +123,7 @@ function startGame() {
     console.log(wordInstance);
 
     //Listening for user selection
-    document.addEventListener('keyup', function (event) {
-
+    document.onkeyup = function(event) {
         //Storing user selected letter in variable keyName
         var keyName = event.key;
 
@@ -109,14 +131,10 @@ function startGame() {
         var hit = isGuessInWord(keyName);
 
         //Updating number of guesses left
-        if (hit.length === 0) {
-            numOfGuesses--;
-            var num = document.getElementById("num");
-            num.innerHTML = "Number of Guesses Left: " + numOfGuesses;
-        } 
+        updateGuessesRemaining(hit);
 
         //Updating display of user guesses
-        updateGuesses(keyName, );
+        updateGuesses(keyName);
 
         //Updating guess hit
         displayGuess(keyName, hit);
@@ -126,8 +144,8 @@ function startGame() {
 
         //User loses?
         checkIfLost();
-    });
-    
+    }
 }
+
 
 
