@@ -5,44 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
     <script src="assets/javascript/game.js"></script>
     <title>Word Guess Game</title>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1>Star Wars</h1> <!--Inlcude Star Wars themed header-->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <p>Parallax</p> <!--Star Wars intro scene parallax goes here-->
-                <p>Intro text</p> <!--Intro text e.g., at the beginning of the Star Wars films-->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <p>Hanging guy</p> <!--Hanging character w/ animations *hopefully* go here-->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <p>Hangman interface</p> <!--Wins, Losses, Letters guessed, strikes-->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <input type="button" id="myBtn" onclick="startGame()" value="Start The Battle">
-                <div id="display" style="display: none;">
-                    <p id="wins">User Wins: 0</p>
-                    <p id="losses">User Losses: 0</p>
-                    <p id="counter">Game Counter: 1</p>
-                    <div id="playAgain" style="display: none;">
-                        <p id="num">Number of Guesses Left: 7</p>
-                        <p id="userGuess">User Guesses</p>
-                        <p id="word">This is the word</p>
+    <div class="bg">
+        <div class="control-size">
+            <section class="intro">
+                A long time ago, in a galaxy far,<br> far away....
+            </section>
+            <img class="logo" src="assets/images/Star_Wars_Yellow_Logo.svg.png">
+            <h1>HANGMAN</h1>
+            <p class="scroll-text">It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire. During the battle, Rebel spies managed to steal a secret weapon capable of destroying the Empire’s ultimate battleship, the DEATH STAR.</p>
+            <p class="scroll-text">In a daring plan concoted by the Rebel elders, it has been decided to affix the stolen weapon to the Millennium Falcon and engage the DEATH STAR head on. Volunteers have come forward to pilot the Falcon, but one last member is needed to operate the secret weapon.</p>
+            <p class="scroll-text">Your mission, if you choose to accept it, is to (wo)man the weapon and deal a fatal blow to the Empire's aspirations for intergalactic domination by destroying the DEATH STAR. Guess the Star Wars themed words correctly before your guesses are out and save the GALAXY!</p>
+            <p class="start-info">Click R2D2 to Play</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <input id="startGame" type="image" src="assets/images/button.png" onclick="startGame()">
+                    </div>
+                </div>
+                <div class="row special">  
+                    <div class="col-xs-6">
+                        <div id="display" style="display: none;">
+                            <div class="card card-one" style="width: 18rem;">
+                                <ul class="list-group list-group-flush">
+                                    <li id="wins" class="list-group-item">User Wins: 0</li>
+                                    <li id="losses" class="list-group-item">User Losses: 0</li>
+                                    <li id="counter"class="list-group-item">Game Counter: 1</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div="col-xs-6">
+                        <div id="playAgain" style="display: none;">
+                            <div class="card card-two" style="width: 18rem;">
+                                <ul class="list-group list-group-flush">
+                                    <li id="num" class="list-group-item">Number of Guesses Left: 7</li>
+                                    <li id="userGuess" class="list-group-item">User Guesses</li>
+                                    <li id="word" class="list-group-item">This is the word</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

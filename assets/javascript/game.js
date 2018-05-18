@@ -1,8 +1,3 @@
-//The central logic of the game is basically complete. Game knows 
-//to increment wins, losses, etc. 
-
-//Need to configure reset functions when win occurs or loss occurs.
-
 //Globl variables used throughout
 var userWins = 0;
 var userLosses = 0;
@@ -13,7 +8,7 @@ var wordInstance;
 var placeholder = [];
 var start = false;
 
-var wordsBank = ["Han", "Luke", "Leial"];
+var wordsBank = ["Han", "Luke", "Leia", "Chewie", "Hoth", "Ewok", "Tatooine"];
 
 //Function to restart the game.
 function restart() {
@@ -29,6 +24,8 @@ function restart() {
     word.innerHTML = "This is the word";
 }
 
+//Function to make game counter elements (e.g., wins, losses, game counter, etc)
+//appear on the click of R2D2.
 function appear() {
     var firstDiv = document.getElementById("display");
     var secondDiv = document.getElementById("playAgain")
@@ -36,6 +33,7 @@ function appear() {
     secondDiv.style.display = null;
 }
 
+//Function to make user guesses and blanks/correct letters blank after game completion.
 function hide() {
     var element = document.getElementById("playAgain");
     element.style.display = "none";
@@ -86,6 +84,7 @@ function displayGuess(letterGuessed, array) {
 
 //Function to identify if the user guessed the word. If so, update wins and game counter.
 function checkIfWordGuessed() {
+    var enableR2D2 = document.getElementById("startGame");
     var wins = document.getElementById("wins");
     var counter = document.getElementById("counter");
     if (placeholder.join("") === wordInstance.toLowerCase() && placeholder.length === wordInstance.length) {
@@ -95,17 +94,22 @@ function checkIfWordGuessed() {
         counter.innerHTML = "Game Counter: " + gameCounter;
         restart();
         hide();
+        enableR2D2.setAttribute("onclick", "startGame()");
+        enableR2D2.style.cursor = "pointer";
     }
 }
 
 //Function to identify if the user is out of guesses.
 function checkIfLost() {
     if (numOfGuesses === 0) {
+        var enableR2D2 = document.getElementById("startGame");
         var losses = document.getElementById("losses");
         userLosses++;
         losses.innerHTML = "User Losses: " + userLosses;
         restart();
         hide();
+        enableR2D2.setAttribute("onclick", "startGame()");
+        enableR2D2.style.cursor = "pointer";
     } 
 }
 
@@ -128,6 +132,10 @@ function updateGuessesRemaining(array) {
 //Function to toggle starter boolean to true based on button click.
 function startGame() {
 
+    //Disable button from being pressed repeatedly and breaking the game
+    var disableR2D2 = document.getElementById("startGame");
+    disableR2D2.setAttribute("onclick", "#");
+    disableR2D2.style.cursor = "default";
     //wordInstance for the game is selected
     wordInstance = selectWord();
 
